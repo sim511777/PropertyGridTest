@@ -22,7 +22,6 @@ using System.ComponentModel;
 // - bool 타입 체크박스로
 // - Enum 타입 표시 문자 바꾸기
 // - 문자열 리스트 선택기 (확장하여 오브젝트 리스트 선택기)
-// - 사용자 대화상자 열기
 
 namespace PropertyGridTest {
    class Config {
@@ -46,7 +45,9 @@ namespace PropertyGridTest {
       [CAT("5. Custom Type Converter")]        [DSP("Point")]              [DSC("Point x,y displayed by '/")]      public Point           point2      { get; set; }
 
       [Editor(typeof(FileNameEditor), typeof(UITypeEditor))]
-      [CAT("6. Built-in Cusgom UITypeEditor")] [DSP("File")]               [DSC("Select File")]                    public string          fileName    { get; set; }
+      [CAT("6. UITypeEditor")] [DSP("File")]               [DSC("Select File")]                    public string          fileName    { get; set; }
+      [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
+      [CAT("6. UITypeEditor")] [DSP("String")]               [DSC("Input Text")]                    public string          stringVal2    { get; set; }
    }
 
    [Flags]
@@ -85,4 +86,23 @@ namespace PropertyGridTest {
          return base.ConvertTo(context, culture, value, destinationType);
       }
    }
+
+    class TextInputEditor : UITypeEditor {
+      public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
+         return UITypeEditorEditStyle.Modal;
+      }
+      public override bool IsDropDownResizable { get { return true; } }
+      public override object EditValue(ITypeDescriptorContext context, System.IServiceProvider provider, object value) {
+         FormTextInput form = new FormTextInput();
+         form.tbxText.Text = value as string;
+
+         IWindowsFormsEditorService svc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
+         if(svc.ShowDialog(form) == DialogResult.OK) {
+            value = form.tbxText.Text;
+         }
+
+         return value;
+      }
+   }
+
 }
