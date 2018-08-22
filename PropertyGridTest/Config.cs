@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
 
+// todo:
 // 1. CategoryAttribute : 카테고리 구분
 // 2. DisplayNameAttribute : 프로퍼티 이름
 // 3. DescriptionAttribute : 프로퍼티 설명
@@ -21,6 +22,7 @@ using System.ComponentModel;
 // 5. 다른 에디터를 사용 하려면 : UITypeEditor 를 상속받아 새로운 에디터 클래스 작성
 // - bool 타입 체크박스로
 // - Enum 타입 표시 문자 바꾸기
+// - Flags Enum 체크박스로 바꿈
 // - 문자열 리스트 선택기 (확장하여 오브젝트 리스트 선택기)
 
 namespace PropertyGridTest {
