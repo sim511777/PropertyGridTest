@@ -60,6 +60,7 @@
     <Compile Include="FormTextInput.Designer.cs">
       <DependentUpon>FormTextInput.cs</DependentUpon>
     </Compile>
+    <Compile Include="TypeConverter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
