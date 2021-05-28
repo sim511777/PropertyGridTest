@@ -60,16 +60,21 @@ namespace PropertyGridTest {
         const string cat5 = "5. Custom Type Converter";
         [TypeConverter(typeof(PointConverter))]
         [CAT(cat5)] [DSP("Point")] [DSC("Point x,y displayed by '/")] public Point point2 { get; set; }
+        
         [TypeConverter(typeof(YesNoConverter))]
         [CAT(cat5)] [DSP("bool")] [DSC("True/False -> Yes/No")] public bool boolVal2 { get; set; }
+        
         [TypeConverter(typeof(EnumDisplayNameConverter))]
         [CAT(cat5)] [DSP("Direction")] [DSC("Enum Text Converter")] public Direction dirVal { get; set; }
+        
         [TypeConverter(typeof(StringSelectConverter))]
         [StringList("Please", "Select", "Just", "One")]
         [CAT(cat5)] [DSP("string")] [DSC("You can select 1 string")] public string selText { get; set; } = "choose one";
+        
         [TypeConverter(typeof(Int32SelectConverter))]
         [StringList("Please", "Select", "Just", "One")]
         [CAT(cat5)] [DSP("int")] [DSC("You can select 1 Int32")] public int selInt { get; set; } = 0;
+        
         [TypeConverter(typeof(EnumSelectConverter))]
         [StringList("없음|고정싱글|고정3D|고정대화상자|리사이즈|고정도구창", "|")]
         [CAT(cat5)] [DSP("FormBorderStyle")] [DSC("Select FormBorderStyle value")] public FormBorderStyle fbstyle2 { get; set; }
@@ -77,6 +82,7 @@ namespace PropertyGridTest {
         const string cat6 = "6. UITypeEditor";
         [Editor(typeof(FileNameEditor), typeof(UITypeEditor))]
         [CAT(cat6)] [DSP("File")] [DSC("Select File")] public string fileName { get; set; } = string.Empty;
+        
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
         [CAT(cat6)] [DSP("String")] [DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
     }
