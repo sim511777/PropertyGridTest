@@ -142,9 +142,9 @@ namespace PropertyGridTest {
 
    [AttributeUsage(AttributeTargets.Property)]
    public class StringListAttribute : Attribute {
-      private string[] items;
-      public StringListAttribute(string stringsSeperatedByNewLine, string seperator) {
-         this.items = stringsSeperatedByNewLine.Split(new string[] { seperator }, StringSplitOptions.None);
+      private readonly string[] items;
+      public StringListAttribute(params string[] items) {
+         this.items = items;
       }
       public string[] Items {
          get { return this.items; }

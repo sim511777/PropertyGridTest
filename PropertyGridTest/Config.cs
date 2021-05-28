@@ -65,10 +65,10 @@ namespace PropertyGridTest {
         [TypeConverter(typeof(EnumDisplayNameConverter))]
         [CAT(cat5)] [DSP("Direction")] [DSC("Enum Text Converter")] public Direction dirVal { get; set; }
         [TypeConverter(typeof(StringSelectConverter))]
-        [StringList("Please|Select|Just|One", "|")]
+        [StringList("Please", "Select", "Just", "One")]
         [CAT(cat5)] [DSP("string")] [DSC("You can select 1 string")] public string selText { get; set; } = "choose one";
         [TypeConverter(typeof(Int32SelectConverter))]
-        [StringList("Please|Select|Just|One", "|")]
+        [StringList("Please", "Select", "Just", "One")]
         [CAT(cat5)] [DSP("int")] [DSC("You can select 1 Int32")] public int selInt { get; set; } = 0;
         [TypeConverter(typeof(EnumSelectConverter))]
         [StringList("없음|고정싱글|고정3D|고정대화상자|리사이즈|고정도구창", "|")]
