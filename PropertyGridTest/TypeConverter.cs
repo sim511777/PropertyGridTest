@@ -241,4 +241,69 @@ namespace PropertyGridTest {
          return value;
       }
    }
+
+    class FlagsEditor : UITypeEditor {
+        public FlagsEditor() { }
+
+        // our editor is a Drop-down editor
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
+            return UITypeEditorEditStyle.DropDown;
+        }
+
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
+            // if value is not an enum than we can not edit it
+            if (!(value is Enum))
+                throw new Exception("Value doesn't support");
+
+            // try to figure out that is this a Flags enum or not ?
+            Type enumType = value.GetType();
+            object[] attributes = enumType.GetCustomAttributes(typeof(FlagsAttribute), true);
+            if (attributes.Length == 0)
+                throw new Exception("Editing enum hasn't got Flags attribute");
+            // check the underlying type
+            Type type = Enum.GetUnderlyingType(value.GetType());
+            if (type != typeof(byte) && type != typeof(sbyte) &&
+                  type != typeof(short) && type != typeof(ushort) &&
+                 type != typeof(int) && type != typeof(uint))
+                return value;
+            if (provider != null) {
+                // use windows forms editor service to show drop down
+                IWindowsFormsEditorService edSvc = provider.GetService(
+                     typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
+                if (edSvc == null)
+                    return value;
+                
+                ListBox editor = new ListBox();
+                editor.SelectionMode = SelectionMode.MultiSimple;
+                ListBoxSetEnumFlagsValue(editor, value);
+                edSvc.DropDownControl(editor);
+                return ListBoxGetEnumFlagsValue(editor);
+            }
+            return Convert.ChangeType(value, type);
+        }
+
+        private static void ListBoxSetEnumFlagsValue(ListBox lbx, object value) {
+            // 리스트 색성
+            var enumType = value.GetType();
+            var enumValues = enumType.GetEnumValues();
+            foreach (var enumValue in enumValues) {
+                int idx = lbx.Items.Add(enumValue);
+                if (((int)value & (int)enumValue) != 0)
+                    lbx.SetSelected(idx, true);
+            }
+        }
+
+        private static int ListBoxGetEnumFlagsValue(ListBox lbx) {
+            int result = 0;
+            for (int i = 0; i < lbx.Items.Count; i++) {
+                var item = lbx.Items[i];
+                if (lbx.GetSelected(i)) {
+                    result |= (int)item;
+                } else {
+                    result &= ~(int)item;
+                }
+            }
+            return result;
+        }
+    }
 }

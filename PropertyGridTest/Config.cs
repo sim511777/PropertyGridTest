@@ -79,6 +79,8 @@ namespace PropertyGridTest {
         [CAT(cat6)] [DSP("File")] [DSC("Select File")] public string fileName { get; set; } = string.Empty;
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
         [CAT(cat6)] [DSP("String")] [DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
+        [Editor(typeof(FlagsEditor), typeof(UITypeEditor))]
+        [CAT(cat5)] [DSP("Direction Flags")] [DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
     }
 
     enum Weekday {
@@ -96,6 +98,13 @@ namespace PropertyGridTest {
         [DSC("서쪽")] West,
         [DSC("남쪽")] South,
         [DSC("북극 쪽")] North,
+    }
+    [Flags]
+    enum DirectionFlag {
+        [DSC("동쪽")] East = 1,
+        [DSC("서쪽")] West = 2,
+        [DSC("남쪽")] South = 4,
+        [DSC("북극 쪽")] North = 8,
     }
 
     // TypeConverter
