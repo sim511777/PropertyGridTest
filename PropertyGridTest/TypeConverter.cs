@@ -242,8 +242,8 @@ namespace PropertyGridTest {
       }
    }
 
-    class FlagsEditor : UITypeEditor {
-        public FlagsEditor() { }
+    class EnumFlagsEditor : UITypeEditor {
+        public EnumFlagsEditor() { }
 
         // our editor is a Drop-down editor
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
@@ -273,31 +273,31 @@ namespace PropertyGridTest {
                 if (edSvc == null)
                     return value;
                 
-                ListBox editor = new ListBox();
-                editor.SelectionMode = SelectionMode.MultiSimple;
-                ListBoxSetEnumFlagsValue(editor, value);
-                edSvc.DropDownControl(editor);
-                return ListBoxGetEnumFlagsValue(editor);
+                var lbx = new CheckedListBox();
+                lbx.CheckOnClick = true;
+                ListBoxSetEnumFlagsValue(lbx, value);
+                edSvc.DropDownControl(lbx);
+                return ListBoxGetEnumFlagsValue(lbx);
             }
             return Convert.ChangeType(value, type);
         }
 
-        private static void ListBoxSetEnumFlagsValue(ListBox lbx, object value) {
+        private static void ListBoxSetEnumFlagsValue(CheckedListBox lbx, object value) {
             // 리스트 색성
             var enumType = value.GetType();
             var enumValues = enumType.GetEnumValues();
             foreach (var enumValue in enumValues) {
                 int idx = lbx.Items.Add(enumValue);
                 if (((int)value & (int)enumValue) != 0)
-                    lbx.SetSelected(idx, true);
+                    lbx.SetItemChecked(idx, true);
             }
         }
 
-        private static int ListBoxGetEnumFlagsValue(ListBox lbx) {
+        private static int ListBoxGetEnumFlagsValue(CheckedListBox lbx) {
             int result = 0;
             for (int i = 0; i < lbx.Items.Count; i++) {
                 var item = lbx.Items[i];
-                if (lbx.GetSelected(i)) {
+                if (lbx.GetItemChecked(i)) {
                     result |= (int)item;
                 } else {
                     result &= ~(int)item;

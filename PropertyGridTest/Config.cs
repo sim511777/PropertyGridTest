@@ -85,7 +85,7 @@ namespace PropertyGridTest {
         
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
         [CAT(cat6)] [DSP("String")] [DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
-        [Editor(typeof(FlagsEditor), typeof(UITypeEditor))]
+        [Editor(typeof(EnumFlagsEditor), typeof(UITypeEditor))]
         [CAT(cat5)] [DSP("Direction Flags")] [DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
     }
 
