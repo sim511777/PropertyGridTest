@@ -107,6 +107,7 @@ namespace PropertyGridTest {
     }
     [Flags]
     enum DirectionFlag {
+        [DSC("무향")] None = 0,
         [DSC("동쪽")] East = 1,
         [DSC("서쪽")] West = 2,
         [DSC("남쪽")] South = 4,
