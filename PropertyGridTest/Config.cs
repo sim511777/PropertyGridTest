@@ -12,6 +12,7 @@ using System.Windows.Forms.Design;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Drawing.Imaging;
 
 // todo:
 // ok - BrowsableAttribute : 해당 속성을 감출 수 있다.
@@ -86,8 +87,17 @@ namespace PropertyGridTest {
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
         [CAT(cat6)] [DSP("String")] [DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
         [Editor(typeof(EnumFlagsEditor), typeof(UITypeEditor))]
-        [CAT(cat5)] [DSP("Direction Flags")] [DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
+        [CAT(cat6)] [DSP("Direction Flags")] [DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
+        [Editor(typeof(BitmapEditor), typeof(UITypeEditor))]
+        [CAT(cat6)] [DSP("Bitmap Editor")] [DSC("Bitmap Editor")] public Bitmap bitmap { get; set; } = null;
+        [Editor(typeof(ImageEditor), typeof(UITypeEditor))]
+        [CAT(cat6)] [DSP("Image Editor")] [DSC("Image Editor")] public Image image { get; set; } = null;
+        [Editor(typeof(IconEditor), typeof(UITypeEditor))]
+        [CAT(cat6)] [DSP("Icon Editor")] [DSC("Icon Editor")] public Icon icon { get; set; } = null;
+        [Editor(typeof(MetafileEditor), typeof(UITypeEditor))]
+        [CAT(cat6)] [DSP("Metafile Editor")] [DSC("Metafile Editor")] public Metafile meta { get; set; } = null;
     }
+
 
     enum Weekday {
         Sunday,
