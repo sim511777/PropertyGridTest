@@ -27,8 +27,8 @@ using System.Drawing.Imaging;
 // ok - 문자열 리스트 선택기
 // ok - Enum 문자열 리스트 선택기
 // ok - int 문자열 리스트 선택기
-// - bool 타입 체크박스로
-// - Flags Enum 체크박스로 바꿈
+// ok - bool 타입 체크박스로
+// ok - Flags Enum 체크박스로 바꿈
 
 
 namespace PropertyGridTest {
@@ -96,6 +96,8 @@ namespace PropertyGridTest {
         [CAT(cat6)] [DSP("Icon Editor")] [DSC("Icon Editor")] public Icon icon { get; set; } = null;
         [Editor(typeof(MetafileEditor), typeof(UITypeEditor))]
         [CAT(cat6)] [DSP("Metafile Editor")] [DSC("Metafile Editor")] public Metafile meta { get; set; } = null;
+        [Editor(typeof(BoolCheckBoxEditor), typeof(UITypeEditor))]
+        [CAT(cat6)][DSP("Married")][DSC("BoolCheckBoxEditor ")] public bool married { get; set; } = false;
     }
 
 

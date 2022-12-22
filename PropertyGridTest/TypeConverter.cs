@@ -311,4 +311,33 @@ namespace PropertyGridTest {
             return result;
         }
     }
+
+    class BoolCheckBoxEditor : UITypeEditor {
+        public BoolCheckBoxEditor() { }
+
+        // our editor is a Drop-down editor
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
+            return UITypeEditorEditStyle.DropDown;
+        }
+
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
+            // if value is not an enum than we can not edit it
+            if (!(value is bool))
+                throw new Exception("Value doesn't support");
+
+            if (provider != null) {
+                // use windows forms editor service to show drop down
+                IWindowsFormsEditorService edSvc = provider.GetService(
+                     typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
+                if (edSvc == null)
+                    return value;
+
+                var chk = new CheckBox();
+                chk.Checked = (bool)value;
+                edSvc.DropDownControl(chk);
+                return chk.Checked;
+            }
+            return Convert.ChangeType(value, typeof(bool));
+        }
+    }
 }
