@@ -98,6 +98,8 @@ namespace PropertyGridTest {
         [CAT(cat6)] [DSP("Metafile Editor")] [DSC("Metafile Editor")] public Metafile meta { get; set; } = null;
         [Editor(typeof(BoolCheckBoxEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("Married")][DSC("BoolCheckBoxEditor ")] public bool married { get; set; } = false;
+        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))][TrackbarEditorParams(100, 400)]
+        [CAT(cat6)][DSP("Age")][DSC("TrackbarEditor ")] public int age { get; set; } = 45;
     }
 
 

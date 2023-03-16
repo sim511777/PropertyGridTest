@@ -340,4 +340,52 @@ namespace PropertyGridTest {
             return Convert.ChangeType(value, typeof(bool));
         }
     }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class TrackbarEditorParamsAttribute : Attribute {
+        public int Min { get; }
+        public int Max { get; }
+        public TrackbarEditorParamsAttribute(int min, int max) {
+            Min = min;
+            Max = max;
+        }
+    }
+
+    class TrackbarEditor : UITypeEditor {
+        public TrackbarEditor() { }
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) => UITypeEditorEditStyle.DropDown;
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
+            // if value is not an enum than we can not edit it
+            if (!(value is int))
+                throw new Exception("Value doesn't support");
+
+            if (provider != null) {
+                // use windows forms editor service to show drop down
+                IWindowsFormsEditorService edSvc = provider.GetService(typeof(IWindowsFormsEditorService)) as IWindowsFormsEditorService;
+                if (edSvc == null)
+                    return value;
+
+                var iVal = (int)value;
+
+                var trc = new TrackBar();
+                trc.ValueChanged += (sender, e) => {
+                    context.PropertyDescriptor.SetValue(context.Instance, trc.Value);
+                };
+                var attributes = context.PropertyDescriptor.Attributes.OfType<TrackbarEditorParamsAttribute>();
+                if (attributes.Count() >= 1) {
+                    var trackbarParamsAttribute =  attributes.ElementAt(0);
+                    trc.Minimum = trackbarParamsAttribute.Min;
+                    trc.Maximum = trackbarParamsAttribute.Max;
+                    trc.Value = Math.Max(Math.Min(iVal, trc.Maximum), trc.Minimum);
+                } else {
+                    trc.Minimum = iVal - 100;
+                    trc.Maximum = iVal + 100;
+                    trc.Value = iVal;
+                }
+                edSvc.DropDownControl(trc);
+                return trc.Value;
+            }
+            return Convert.ChangeType(value, typeof(int));
+        }
+    }
 }
