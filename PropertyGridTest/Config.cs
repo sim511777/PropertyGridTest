@@ -36,69 +36,70 @@ namespace PropertyGridTest {
         [BRW(false)] public int hidden { get; set; }
 
         const string cat1 = "1. Basic";
-        [CAT(cat1)] [DSP("bool")] [DSC("Input bool value")] public bool boolVal { get; set; }
-        [CAT(cat1)] [DSP("int")] [DSC("Input int value")] public int intVal { get; set; }
-        [CAT(cat1)] [DSP("float")] [DSC("Input float value")] public float floatVal { get; set; }
-        [CAT(cat1)] [DSP("string")] [DSC("Input string value")] public string stringVal { get; set; } = string.Empty;
-        [CAT(cat1)] [DSP("Color")] [DSC("Input Color value")] public Color ColorVal { get; set; }
-        [CAT(cat1)] [DSP("DateTime")] [DSC("Input DateTime value")] public DateTime DateTimeVal { get; set; }
-        [CAT(cat1)] [DSP("Point")] [DSC("Input Point value")] public Point PointVal { get; set; }
-        [CAT(cat1)] [DSP("Font")] [DSC("Input Font value")] public Font FontVal { get; set; } = SystemFonts.DefaultFont;
+        [CAT(cat1)][DSP("bool")][DSC("Input bool value")] public bool boolVal { get; set; }
+        [CAT(cat1)][DSP("int")][DSC("Input int value")] public int intVal { get; set; }
+        [CAT(cat1)][DSP("float")][DSC("Input float value")] public float floatVal { get; set; }
+        [CAT(cat1)][DSP("string")][DSC("Input string value")] public string stringVal { get; set; } = string.Empty;
+        [CAT(cat1)][DSP("Color")][DSC("Input Color value")] public Color ColorVal { get; set; }
+        [CAT(cat1)][DSP("DateTime")][DSC("Input DateTime value")] public DateTime DateTimeVal { get; set; }
+        [CAT(cat1)][DSP("Point")][DSC("Input Point value")] public Point PointVal { get; set; }
+        [CAT(cat1)][DSP("Font")][DSC("Input Font value")] public Font FontVal { get; set; } = SystemFonts.DefaultFont;
 
         const string cat2 = "2. Enum";
-        [CAT(cat2)] [DSP("FormBorderStyle")] [DSC("Select FormBorderStyle value")] public FormBorderStyle fbstyle { get; set; }
-        [CAT(cat2)] [DSP("Weekday")] [DSC("Weekday Custom Enum")] public Weekday weekday { get; set; }
-        [CAT(cat2)] [DSP("Direction")] [DSC("Direction Custom Enum")] public Direction dir { get; set; }
+        [CAT(cat2)][DSP("FormBorderStyle")][DSC("Select FormBorderStyle value")] public FormBorderStyle fbstyle { get; set; }
+        [CAT(cat2)][DSP("Weekday")][DSC("Weekday Custom Enum")] public Weekday weekday { get; set; }
+        [CAT(cat2)][DSP("Direction")][DSC("Direction Custom Enum")] public Direction dir { get; set; }
 
         const string cat3 = "3. Array";
-        [CAT(cat3)] [DSP("Integer Array")] [DSC("Input int array")] public int[] intArrayVal { get; set; } = new int[0];
-        [CAT(cat3)] [DSP("String Array")] [DSC("Input string array")] public string[] strArrayVal { get; set; } = new string[0];
+        [CAT(cat3)][DSP("Integer Array")][DSC("Input int array")] public int[] intArrayVal { get; set; } = new int[0];
+        [CAT(cat3)][DSP("String Array")][DSC("Input string array")] public string[] strArrayVal { get; set; } = new string[0];
 
         const string cat4 = "4. Custom Class";
-        [CAT(cat4)] [DSP("Person")] [DSC("Custom class")] public Person Personval { get; set; } = new Person();
-        [CAT(cat4)] [DSP("People")] [DSC("Custom class array")] public Person[] PersonArrayVal { get; set; } = new Person[0];
+        [CAT(cat4)][DSP("Person")][DSC("Custom class")] public Person Personval { get; set; } = new Person();
+        [CAT(cat4)][DSP("People")][DSC("Custom class array")] public Person[] PersonArrayVal { get; set; } = new Person[0];
 
         const string cat5 = "5. Custom Type Converter";
         [TypeConverter(typeof(PointConverter))]
-        [CAT(cat5)] [DSP("Point")] [DSC("Point x,y displayed by '/")] public Point point2 { get; set; }
-        
+        [CAT(cat5)][DSP("Point")][DSC("Point x,y displayed by '/")] public Point point2 { get; set; }
+
         [TypeConverter(typeof(YesNoConverter))]
-        [CAT(cat5)] [DSP("bool")] [DSC("True/False -> Yes/No")] public bool boolVal2 { get; set; }
-        
+        [CAT(cat5)][DSP("bool")][DSC("True/False -> Yes/No")] public bool boolVal2 { get; set; }
+
         [TypeConverter(typeof(EnumDisplayNameConverter))]
-        [CAT(cat5)] [DSP("Direction")] [DSC("Enum Text Converter")] public Direction dirVal { get; set; }
-        
+        [CAT(cat5)][DSP("Direction")][DSC("Enum Text Converter")] public Direction dirVal { get; set; }
+
         [TypeConverter(typeof(StringSelectConverter))]
         [StringList("Please", "Select", "Just", "One")]
-        [CAT(cat5)] [DSP("string")] [DSC("You can select 1 string")] public string selText { get; set; } = "choose one";
-        
+        [CAT(cat5)][DSP("string")][DSC("You can select 1 string")] public string selText { get; set; } = "choose one";
+
         [TypeConverter(typeof(Int32SelectConverter))]
         [StringList("Please", "Select", "Just", "One")]
-        [CAT(cat5)] [DSP("int")] [DSC("You can select 1 Int32")] public int selInt { get; set; } = 0;
-        
+        [CAT(cat5)][DSP("int")][DSC("You can select 1 Int32")] public int selInt { get; set; } = 0;
+
         [TypeConverter(typeof(EnumSelectConverter))]
         [StringList("없음|고정싱글|고정3D|고정대화상자|리사이즈|고정도구창", "|")]
-        [CAT(cat5)] [DSP("FormBorderStyle")] [DSC("Select FormBorderStyle value")] public FormBorderStyle fbstyle2 { get; set; }
+        [CAT(cat5)][DSP("FormBorderStyle")][DSC("Select FormBorderStyle value")] public FormBorderStyle fbstyle2 { get; set; }
 
         const string cat6 = "6. UITypeEditor";
         [Editor(typeof(FileNameEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("File")] [DSC("Select File")] public string fileName { get; set; } = string.Empty;
-        
+        [CAT(cat6)][DSP("File")][DSC("Select File")] public string fileName { get; set; } = string.Empty;
+
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("String")] [DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
+        [CAT(cat6)][DSP("String")][DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
         [Editor(typeof(EnumFlagsEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("Direction Flags")] [DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
+        [CAT(cat6)][DSP("Direction Flags")][DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
         [Editor(typeof(BitmapEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("Bitmap Editor")] [DSC("Bitmap Editor")] public Bitmap bitmap { get; set; } = null;
+        [CAT(cat6)][DSP("Bitmap Editor")][DSC("Bitmap Editor")] public Bitmap bitmap { get; set; } = null;
         [Editor(typeof(ImageEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("Image Editor")] [DSC("Image Editor")] public Image image { get; set; } = null;
+        [CAT(cat6)][DSP("Image Editor")][DSC("Image Editor")] public Image image { get; set; } = null;
         [Editor(typeof(IconEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("Icon Editor")] [DSC("Icon Editor")] public Icon icon { get; set; } = null;
+        [CAT(cat6)][DSP("Icon Editor")][DSC("Icon Editor")] public Icon icon { get; set; } = null;
         [Editor(typeof(MetafileEditor), typeof(UITypeEditor))]
-        [CAT(cat6)] [DSP("Metafile Editor")] [DSC("Metafile Editor")] public Metafile meta { get; set; } = null;
+        [CAT(cat6)][DSP("Metafile Editor")][DSC("Metafile Editor")] public Metafile meta { get; set; } = null;
         [Editor(typeof(BoolCheckBoxEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("Married")][DSC("BoolCheckBoxEditor ")] public bool married { get; set; } = false;
-        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))][TrackbarEditorParams(100, 400)]
+        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))]
+        [TrackbarEditorParams(100, 400)]
         [CAT(cat6)][DSP("Age")][DSC("TrackbarEditor ")] public int age { get; set; } = 45;
     }
 
