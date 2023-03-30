@@ -13,6 +13,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Drawing.Imaging;
+using System.ComponentModel.Design;
 
 // todo:
 // ok - BrowsableAttribute : 해당 속성을 감출 수 있다.
@@ -86,6 +87,8 @@ namespace PropertyGridTest {
 
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("String")][DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
+        [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
+        [CAT(cat6)][DSP("MultiLine String")][DSC("Input Multiline Text")] public string stringVal3 { get; set; } = string.Empty;
         [Editor(typeof(EnumFlagsEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("Direction Flags")][DSC("FlagsEditor ")] public DirectionFlag dirFlagVal { get; set; } = DirectionFlag.North | DirectionFlag.West;
         [Editor(typeof(BitmapEditor), typeof(UITypeEditor))]
