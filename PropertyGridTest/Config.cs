@@ -106,7 +106,7 @@ namespace PropertyGridTest {
         [CAT(cat6)][DSP("Married")][DSC("BoolCheckBoxEditor ")] public bool married { get; set; } = false;
 
         private int age = 45;
-        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))][Params(100, 400)]
+        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))][TrackBarParams(100, 400)]
         [CAT(cat6)][DSP("Age")][DSC("TrackbarEditor ")]
         public int Age {
             get => age;
@@ -116,7 +116,7 @@ namespace PropertyGridTest {
             }
         }
         private int weight = 70;
-        [Editor(typeof(TrackbarFormEditor), typeof(UITypeEditor))][Params(100, 400)]
+        [Editor(typeof(TrackbarFormEditor), typeof(UITypeEditor))][TrackBarParams(100, 400)]
         [CAT(cat6)][DSP("Weight")][DSC("TrackbarFormEditor ")]
         public int Weight {
             get => weight;

@@ -143,7 +143,7 @@ namespace PropertyGridTest {
                 trc.ValueChanged += (sender, e) => {
                     context.PropertyDescriptor.SetValue(context.Instance, trc.Value);
                 };
-                var prms = context.PropertyDescriptor.Attributes.OfType<ParamsAttribute>().FirstOrDefault();
+                var prms = context.PropertyDescriptor.Attributes.OfType<TrackBarParamsAttribute>().FirstOrDefault();
                 if (prms != null) {
                     trc.Minimum = prms.Min;
                     trc.Maximum = prms.Max;
@@ -160,11 +160,11 @@ namespace PropertyGridTest {
         }
     }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    internal class ParamsAttribute : Attribute {
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
+    internal class TrackBarParamsAttribute : Attribute {
         public int Min { get; }
         public int Max { get; }
-        public ParamsAttribute(int min, int max) {
+        public TrackBarParamsAttribute(int min, int max) {
             Min = min;
             Max = max;
         }
@@ -191,7 +191,7 @@ namespace PropertyGridTest {
                 trc.ValueChanged += (sender, e) => {
                     context.PropertyDescriptor.SetValue(context.Instance, trc.Value);
                 };
-                var prms = context.PropertyDescriptor.Attributes.OfType<ParamsAttribute>().FirstOrDefault();
+                var prms = context.PropertyDescriptor.Attributes.OfType<TrackBarParamsAttribute>().FirstOrDefault();
                 if (prms != null) {
                     trc.Minimum = prms.Min;
                     trc.Maximum = prms.Max;
