@@ -341,16 +341,6 @@ namespace PropertyGridTest {
         }
     }
 
-    [AttributeUsage(AttributeTargets.Property)]
-    public class TrackbarEditorParamsAttribute : Attribute {
-        public int Min { get; }
-        public int Max { get; }
-        public TrackbarEditorParamsAttribute(int min, int max) {
-            Min = min;
-            Max = max;
-        }
-    }
-
     class TrackbarEditor : UITypeEditor {
         public TrackbarEditor() { }
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) => UITypeEditorEditStyle.DropDown;
@@ -371,7 +361,7 @@ namespace PropertyGridTest {
                 trc.ValueChanged += (sender, e) => {
                     context.PropertyDescriptor.SetValue(context.Instance, trc.Value);
                 };
-                var attributes = context.PropertyDescriptor.Attributes.OfType<TrackbarEditorParamsAttribute>();
+                var attributes = context.PropertyDescriptor.Attributes.OfType<ParamsAttribute>();
                 if (attributes.Count() >= 1) {
                     var trackbarParamsAttribute =  attributes.ElementAt(0);
                     trc.Minimum = trackbarParamsAttribute.Min;
@@ -386,6 +376,16 @@ namespace PropertyGridTest {
                 return trc.Value;
             }
             return Convert.ChangeType(value, typeof(int));
+        }
+
+        [AttributeUsage(AttributeTargets.Property)]
+        internal class ParamsAttribute : Attribute {
+            public int Min { get; }
+            public int Max { get; }
+            public ParamsAttribute(int min, int max) {
+                Min = min;
+                Max = max;
+            }
         }
     }
 }
