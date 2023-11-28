@@ -23,27 +23,27 @@
       /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
       /// </summary>
       private void InitializeComponent() {
-         this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
-         this.SuspendLayout();
-         // 
-         // propertyGrid1
-         // 
-         this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
-         this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
-         this.propertyGrid1.Name = "propertyGrid1";
-         this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-         this.propertyGrid1.Size = new System.Drawing.Size(467, 631);
-         this.propertyGrid1.TabIndex = 1;
-         // 
-         // Form1
-         // 
-         this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-         this.ClientSize = new System.Drawing.Size(467, 631);
-         this.Controls.Add(this.propertyGrid1);
-         this.Name = "Form1";
-         this.Text = "Form1";
-         this.ResumeLayout(false);
+            this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.SuspendLayout();
+            // 
+            // propertyGrid1
+            // 
+            this.propertyGrid1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGrid1.Location = new System.Drawing.Point(0, 0);
+            this.propertyGrid1.Name = "propertyGrid1";
+            this.propertyGrid1.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.propertyGrid1.Size = new System.Drawing.Size(512, 1141);
+            this.propertyGrid1.TabIndex = 1;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(512, 1141);
+            this.Controls.Add(this.propertyGrid1);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
 
       }
 

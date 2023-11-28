@@ -33,7 +33,9 @@ using System.ComponentModel.Design;
 
 
 namespace PropertyGridTest {
-    class Config {
+    class Config : INotifyPropertyChanged {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         [BRW(false)] public int hidden { get; set; }
 
         const string cat1 = "1. Basic";
@@ -82,9 +84,10 @@ namespace PropertyGridTest {
         [CAT(cat5)][DSP("FormBorderStyle")][DSC("Select FormBorderStyle value")] public FormBorderStyle fbstyle2 { get; set; }
 
         const string cat6 = "6. UITypeEditor";
+
         [Editor(typeof(FileNameEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("File")][DSC("Select File")] public string fileName { get; set; } = string.Empty;
-
+        
         [Editor(typeof(TextInputEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("String")][DSC("Input Text")] public string stringVal2 { get; set; } = string.Empty;
         [Editor(typeof(MultilineStringEditor), typeof(UITypeEditor))]
@@ -101,9 +104,27 @@ namespace PropertyGridTest {
         [CAT(cat6)][DSP("Metafile Editor")][DSC("Metafile Editor")] public Metafile meta { get; set; } = null;
         [Editor(typeof(BoolCheckBoxEditor), typeof(UITypeEditor))]
         [CAT(cat6)][DSP("Married")][DSC("BoolCheckBoxEditor ")] public bool married { get; set; } = false;
-        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))]
-        [TrackbarEditor.Params(100, 400)]
-        [CAT(cat6)][DSP("Age")][DSC("TrackbarEditor ")] public int age { get; set; } = 45;
+
+        private int age = 45;
+        [Editor(typeof(TrackbarEditor), typeof(UITypeEditor))][Params(100, 400)]
+        [CAT(cat6)][DSP("Age")][DSC("TrackbarEditor ")]
+        public int Age {
+            get => age;
+            set {
+                age = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Age)));
+            }
+        }
+        private int weight = 70;
+        [Editor(typeof(TrackbarFormEditor), typeof(UITypeEditor))][Params(100, 400)]
+        [CAT(cat6)][DSP("Weight")][DSC("TrackbarFormEditor ")]
+        public int Weight {
+            get => weight;
+            set {
+                weight = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Weight)));
+            }
+        }
     }
 
 
